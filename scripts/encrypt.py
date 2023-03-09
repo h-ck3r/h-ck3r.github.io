@@ -15,9 +15,12 @@ for root, dirs, files in os.walk("./website_source/build"):
         
     for name in files:
         file_extension: str = name.split(".")[-1]
+        path: str = os.path.join(root, name)
 
-        if file_extension == "html" or file_extension == "css":
-            path: str = os.path.join(root, name)
+        if file_extension == "html":
             os.system(f"npx pagecrypt {path} {path.replace('website_source/build', 'docs')} {password}")
+        
+        elif file_extension == "css":
+            os.system(f"cp {path} {path.replace('website_source/build', 'docs')}")
 
 os.system("rm -rf website_source")
